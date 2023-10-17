@@ -69,8 +69,8 @@ def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, 
     if usecompsused == True:
         usescreenedcomps = True
     
-    from astrosource import TimeSeries
-    ts = TimeSeries(indir=parentPath,
+    #from astrosource import TimeSeries
+    ts = astrosource.TimeSeries(indir=parentPath,
                         targets=targets,
                         format=format,
                         imgreject=imgreject,
