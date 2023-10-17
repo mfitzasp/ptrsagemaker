@@ -2,7 +2,13 @@
 
 import os
 import glob
-import numpy
+
+try:
+    import numpy
+except:
+    os.system('%pip install numpy')
+    import numpy
+    
 try:
     import wget
 except:
