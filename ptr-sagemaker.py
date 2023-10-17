@@ -17,12 +17,12 @@ def update_packages():
 def download_frames_from_ptrarchive(location='.', frames=[]):
     print ("Download_frames_from_ptrarchive")
 
-def run_astrosource_on_photfiles(full=True, stars=True, comparison=True, variablehunt=True, notarget=False, lowestcounts=1800, usescreenedcomps=False, usepreviousvarsearch=False, \
-    calibsave=False, outliererror=4, outlierstdev=4, varsearchglobalstdev=-99.9, varsearchstdev=10000, varsearchmagwidth=0.5, \
+def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, variablehunt=True, notarget=False, lowestcounts=1800, usescreenedcomps=False, usepreviousvarsearch=False, \
+    calibsave=False, outliererror=4, outlierstdev=4, varsearchglobalstdev=-99.9, varsearchstdev=2, varsearchmagwidth=0.5, \
     varsearchminimages=0.3, ignoreedgefraction=0.05, usecompsused=False, usecompletedcalib=False, mincompstarstotal=-99, calc=True, \
-    calib=True, phot=True, plot=True, detrend=False, eebls=False, period=True, indir='.', ra=None, dec=None, target_file=None, format='sek', imgreject=0.05, \
+    calib=True, phot=True, plot=True, detrend=False, eebls=False, period=True, ra=None, dec=None, target_file=None, format='sek', imgreject=0.05, \
     mincompstars=0.1, maxcandidatestars=10000, closerejectd=5.0, bjd=True, clean=False, verbose=True, debug=False, periodlower=-99.9, periodupper=-99.9, \
-    periodtests=-99.9,  thresholdcounts=1000000, nopanstarrs=False, nosdss=False, varsearch=False, varsearchthresh=10000, starreject=0.3, hicounts=3000000, \
+    periodtests=10000,  thresholdcounts=1000000, nopanstarrs=False, nosdss=False, varsearch=False, varsearchthresh=10000, starreject=0.3, hicounts=3000000, \
     lowcounts=5000, colourdetect=False, linearise=False, colourterm=0.0, colourerror=0.0, targetcolour=-99.0, restrictmagbrightest=-99.9, \
     restrictmagdimmest=99.9, rejectmagbrightest=-99.9, rejectmagdimmest=99.9,targetradius=1.5, matchradius=1.0, racut=-99.9, deccut=-99.9, \
     radiuscut=-99.9, restrictcompcolourcentre=-99.9, restrictcompcolourrange=-99.9, detrendfraction=0.1, minfractionimages=0.5):
@@ -30,7 +30,7 @@ def run_astrosource_on_photfiles(full=True, stars=True, comparison=True, variabl
     
     
     #fileList=glob.glob(string_list)
-    indir='testphotfiles/'
+    #indir='testphotfiles/'
     
     # Default options
     parentPath = Path(indir)
@@ -141,6 +141,6 @@ def run_astrosource_on_photfiles(full=True, stars=True, comparison=True, variabl
 
     print("✅ AstroSource analysis complete\n")
 
-    breakpoint()
+breakpoint()
     
-run_astrosource_on_photfiles()
+#run_astrosource_on_photfiles()
