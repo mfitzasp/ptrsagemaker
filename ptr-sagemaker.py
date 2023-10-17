@@ -1,0 +1,146 @@
+# Python commandset for using sagemaker to utilise PTR data
+
+import os
+import glob
+import numpy
+from pathlib import Path
+try:
+    import astrosource
+    from astrosource import TimeSeries
+    from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
+except:
+    os.system('pip install --user git+https://github.com/zemogle/astrosource@dev')
+
+def update_packages():
+    os.system('pip install --user git+https://github.com/zemogle/astrosource@dev')
+    
+def download_frames_from_ptrarchive(location='.', frames=[]):
+    print ("Download_frames_from_ptrarchive")
+
+def run_astrosource_on_photfiles(full=True, stars=True, comparison=True, variablehunt=True, notarget=False, lowestcounts=1800, usescreenedcomps=False, usepreviousvarsearch=False, \
+    calibsave=False, outliererror=4, outlierstdev=4, varsearchglobalstdev=-99.9, varsearchstdev=10000, varsearchmagwidth=0.5, \
+    varsearchminimages=0.3, ignoreedgefraction=0.05, usecompsused=False, usecompletedcalib=False, mincompstarstotal=-99, calc=True, \
+    calib=True, phot=True, plot=True, detrend=False, eebls=False, period=True, indir='.', ra=None, dec=None, target_file=None, format='sek', imgreject=0.05, \
+    mincompstars=0.1, maxcandidatestars=10000, closerejectd=5.0, bjd=True, clean=False, verbose=True, debug=False, periodlower=-99.9, periodupper=-99.9, \
+    periodtests=-99.9,  thresholdcounts=1000000, nopanstarrs=False, nosdss=False, varsearch=False, varsearchthresh=10000, starreject=0.3, hicounts=3000000, \
+    lowcounts=5000, colourdetect=False, linearise=False, colourterm=0.0, colourerror=0.0, targetcolour=-99.0, restrictmagbrightest=-99.9, \
+    restrictmagdimmest=99.9, rejectmagbrightest=-99.9, rejectmagdimmest=99.9,targetradius=1.5, matchradius=1.0, racut=-99.9, deccut=-99.9, \
+    radiuscut=-99.9, restrictcompcolourcentre=-99.9, restrictcompcolourrange=-99.9, detrendfraction=0.1, minfractionimages=0.5):
+    parentPath='testphotfiles'
+    
+    
+    #fileList=glob.glob(string_list)
+    indir='testphotfiles/'
+    
+    # Default options
+    parentPath = Path(indir)
+    if clean:
+        cleanup(parentPath)
+        print('All output files removed')
+        return
+    if not (ra and dec) and not target_file and not variablehunt:
+        #logger.error("Either RA and Dec or a targetfile must be specified")
+        print("No specified RA or Dec nor targetfile nor request for a variable hunt. It is assumed you have no target to analyse.")
+        notarget=True
+        #return
+
+
+
+    if ra and dec:
+        ra, dec = convert_coords(ra, dec)
+        targets = numpy.array([(ra, dec, 0, 0)])
+    elif target_file:
+        target_file = parentPath / target_file
+        targets = get_targets(target_file)
+    elif notarget == True or variablehunt == True:
+        targets = None
+
+    if variablehunt == True:
+        varsearch=True
+        full=True
+
+
+    if usecompletedcalib == True:
+        usecompsused = True
+
+    if usecompsused == True:
+        usescreenedcomps = True
+    
+    
+    ts = TimeSeries(indir=parentPath,
+                        targets=targets,
+                        format=format,
+                        imgreject=imgreject,
+                        periodupper=periodupper,
+                        periodlower=periodlower,
+                        periodtests=periodtests,
+                        thresholdcounts=thresholdcounts,
+                        lowcounts=lowcounts,
+                        hicounts=hicounts,
+                        starreject=starreject,
+                        nopanstarrs=nopanstarrs,
+                        nosdss=nosdss,
+                        closerejectd=closerejectd,
+                        maxcandidatestars=maxcandidatestars,
+                        verbose=verbose,
+                        debug=debug,
+                        bjd=bjd,
+                        mincompstars=mincompstars,
+                        mincompstarstotal=mincompstarstotal,
+                        colourdetect=colourdetect,
+                        linearise=linearise,
+                        variablehunt=variablehunt,
+                        calibsave=calibsave,
+                        notarget=notarget,
+                        usescreenedcomps=usescreenedcomps,
+                        usepreviousvarsearch=usepreviousvarsearch,
+                        colourterm=colourterm,
+                        colourerror=colourerror,
+                        targetcolour=targetcolour,
+                        restrictmagbrightest=restrictmagbrightest,
+                        restrictmagdimmest=restrictmagdimmest,
+                        rejectmagbrightest=rejectmagbrightest,
+                        rejectmagdimmest=rejectmagdimmest,
+                        targetradius=targetradius,
+                        matchradius=matchradius,
+                        varsearchglobalstdev=varsearchglobalstdev,
+                        varsearchthresh=varsearchthresh,
+                        varsearchstdev=varsearchstdev,
+                        varsearchmagwidth=varsearchmagwidth,
+                        varsearchminimages=varsearchminimages,
+                        ignoreedgefraction=ignoreedgefraction,
+                        outliererror=outliererror,
+                        outlierstdev=outlierstdev,
+                        lowestcounts=lowestcounts,
+                        racut=racut,
+                        deccut=deccut,
+                        radiuscut=radiuscut,
+                        restrictcompcolourcentre=restrictcompcolourcentre,
+                        restrictcompcolourrange=restrictcompcolourrange,
+                        detrendfraction=detrendfraction,
+                        minfractionimages=minfractionimages
+                        )
+    
+    if full or comparison:
+        ts.analyse(usescreenedcomps=usescreenedcomps, usecompsused=usecompsused, usecompletedcalib=usecompletedcalib)
+
+
+    if (full or calc) and varsearch and not usepreviousvarsearch :
+        ts.find_variables()
+
+    if variablehunt == True:
+        targets = get_targets(parentPath / 'results/potentialVariables.csv')
+
+
+
+    if targets is not None:
+        if full or phot:
+            ts.photometry(filesave=True, targets=targets)
+        if full or plot:
+            ts.plot(detrend=detrend, period=period, eebls=eebls, filesave=True)
+
+    print("✅ AstroSource analysis complete\n")
+
+    breakpoint()
+    
+run_astrosource_on_photfiles()
