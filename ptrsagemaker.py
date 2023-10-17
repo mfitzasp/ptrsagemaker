@@ -9,10 +9,13 @@ try:
     from astrosource import TimeSeries
     from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
 except:
-    os.system('pip install --user git+https://github.com/zemogle/astrosource@dev')
+    os.system('pip install git+https://github.com/zemogle/astrosource@dev')
+    import astrosource
+    from astrosource import TimeSeries
+    from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
 
 def update_packages():
-    os.system('pip install --user git+https://github.com/zemogle/astrosource@dev')
+    os.system('pip install git+https://github.com/zemogle/astrosource@dev')
     
 def download_frames_from_ptrarchive(location='.', frames=[]):
     print ("Download_frames_from_ptrarchive")
@@ -66,7 +69,7 @@ def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, 
     if usecompsused == True:
         usescreenedcomps = True
     
-    
+    from astrosource import TimeSeries
     ts = TimeSeries(indir=parentPath,
                         targets=targets,
                         format=format,
