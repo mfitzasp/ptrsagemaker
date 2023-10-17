@@ -60,7 +60,7 @@ def download_frames_from_ptrarchive(location='.', frames=[]):
     
     print ("Download_frames_from_ptrarchive")
 
-def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, variablehunt=True, notarget=False, lowestcounts=1800, usescreenedcomps=False, usepreviousvarsearch=False, \
+def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, variablehunt=False, notarget=False, lowestcounts=1800, usescreenedcomps=False, usepreviousvarsearch=False, \
     calibsave=False, outliererror=4, outlierstdev=4, varsearchglobalstdev=-99.9, varsearchstdev=2, varsearchmagwidth=0.5, \
     varsearchminimages=0.3, ignoreedgefraction=0.05, usecompsused=False, usecompletedcalib=False, mincompstarstotal=-99, calc=True, \
     calib=True, phot=True, plot=True, detrend=False, eebls=False, period=True, ra=None, dec=None, target_file=None, format='sek', imgreject=0.05, \
