@@ -3,21 +3,61 @@
 import os
 import glob
 import numpy
+try:
+    import wget
+except:
+    os.system('%pip install wget')
+    import wget
+import json
+import sys
+from astropy.io import fits
 from pathlib import Path
+import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
+
 try:
     import astrosource
     from astrosource import TimeSeries
     from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
 except:
-    os.system('pip install git+https://github.com/zemogle/astrosource@dev')
+    os.system('%pip install git+https://github.com/zemogle/astrosource@dev')
     import astrosource
     from astrosource import TimeSeries
     from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
 
 def update_packages():
-    os.system('pip install git+https://github.com/zemogle/astrosource@dev')
+    os.system('%pip install git+https://github.com/zemogle/astrosource@dev')
     
 def download_frames_from_ptrarchive(location='.', frames=[]):
+    
+    
+    session = requests.Session()
+    retry = Retry(connect=5, backoff_factor=2.0, method_whitelist=frozenset(['GET', 'POST']))
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount('http://', adapter)
+    session.mount('https://', adapter)
+    
+    #frames='(509954,507152,509116,507858,508370,508106,510918,509917,508897,508196,507674,507629,507970,510577,510612,507818,508289,509879,507344,507890,509137,510364,508233,507389,508701,507714,508178,508138,507637,508114,508307,507994,507605,510686,507210,507597,507698,510591,509082,509458,509014,510768,508082,507224,507423,508668,507668,507954,509968,510161,507738,510125,510413,507730,507312,508273,508623,507866,509000,508034,507778,508881,509063,510472,509683,507328,508968,508800,508313,507469,508910,508759,508653,509651,508281,509425,508130,507908,508074,507240,510854,509514)'
+    
+    
+    authtoken="AUTHTOKEN"
+    frame_url="https://archiveapi.photonranch.org/frames/"
+    frames=frames.replace('(','').replace(')','')
+    frames=frames.split(',')
+    
+    if not os.path.exists(location):
+        os.makedirs(location)
+        
+    for frame in frames:
+        response=session.get(frame_url + frame)
+        download_url=response.json()['url']
+        print ("Downloading: " + str(response.json()['filename']))
+        with open(location + '/' + response.json()['filename'],'wb') as f:
+            f.write(session.get(download_url).content)
+        
+    breakpoint()
+    
     print ("Download_frames_from_ptrarchive")
 
 def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, variablehunt=True, notarget=False, lowestcounts=1800, usescreenedcomps=False, usepreviousvarsearch=False, \
@@ -143,6 +183,8 @@ def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, 
             ts.plot(detrend=detrend, period=period, eebls=eebls, filesave=True)
 
     print("✅ AstroSource analysis complete\n")
+
+#download_frames_from_ptrarchive()
 
 breakpoint()
     
