@@ -16,11 +16,24 @@ except:
     import wget
 import json
 import sys
-from astropy.io import fits
+try:
+
+    from astropy.io import fits
+except:
+    os.system('%pip install astropy')
+    import astropy
+    
 from pathlib import Path
-import requests
-from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+
+try:
+    import requests
+    from requests.adapters import HTTPAdapter
+    from requests.packages.urllib3.util.retry import Retry
+except:
+    os.system('%pip install requests')
+    import requests
+    from requests.adapters import HTTPAdapter
+    from requests.packages.urllib3.util.retry import Retry
 
 try:
     import astrosource
