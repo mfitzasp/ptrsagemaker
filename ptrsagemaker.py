@@ -54,7 +54,8 @@ def download_frames_from_ptrarchive(location='.', frames=[]):
     
     
     session = requests.Session()
-    retry = Retry(connect=5, backoff_factor=2.0, method_whitelist=frozenset(['GET', 'POST']))
+    #retry = Retry(connect=5, backoff_factor=2.0, method_whitelist=frozenset(['GET', 'POST']))
+    retry = Retry(connect=5, backoff_factor=2.0)
     adapter = HTTPAdapter(max_retries=retry)
     session.mount('http://', adapter)
     session.mount('https://', adapter)
