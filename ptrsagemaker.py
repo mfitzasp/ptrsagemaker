@@ -41,9 +41,11 @@ try:
     from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
 except:
     os.system('pip install git+https://github.com/zemogle/astrosource@dev')
+    os.system('pip install tqdm')
     import astrosource
     from astrosource import TimeSeries
     from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
+    import tqdm
 
 def update_packages():
     os.system('pip install git+https://github.com/zemogle/astrosource@dev')
