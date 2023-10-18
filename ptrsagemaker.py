@@ -48,7 +48,7 @@ except:
     import tqdm
 
 def update_packages():
-    os.system('pip install git+https://github.com/zemogle/astrosource@dev')
+    os.system('pip install -U git+https://github.com/zemogle/astrosource@dev')
     
 def download_frames_from_ptrarchive(location='.', frames=[]):
     
