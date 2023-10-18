@@ -48,14 +48,24 @@ except:
     import tqdm
 
 def update_packages():
+    os.system('pip install -U tqdm')
+    os.system('pip uninstall -y astrosource')
     os.system('pip install -U git+https://github.com/zemogle/astrosource@dev')
+    os.system('pip install -U requests')
+    os.system('pip install -U wget')
+    os.system('pip install -U astropy')
+    os.system('pip install -U numpy')
+    print ("Packages updated. Please restart your console to use the latest packages.")
+    
+    
+    
     
 def download_frames_from_ptrarchive(location='.', frames=[]):
     
     
     session = requests.Session()
-    #retry = Retry(connect=5, backoff_factor=2.0, method_whitelist=frozenset(['GET', 'POST']))
-    retry = Retry(connect=5, backoff_factor=2.0)
+    retry = Retry(connect=5, backoff_factor=2.0, allowed_methods=frozenset(['GET', 'POST']))
+    #retry = Retry(connect=5, backoff_factor=2.0)
     adapter = HTTPAdapter(max_retries=retry)
     session.mount('http://', adapter)
     session.mount('https://', adapter)
