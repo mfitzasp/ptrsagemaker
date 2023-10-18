@@ -6,13 +6,13 @@ import glob
 try:
     import numpy
 except:
-    os.system('%pip install numpy')
+    os.system('pip install numpy')
     import numpy
     
 try:
     import wget
 except:
-    os.system('%pip install wget')
+    os.system('pip install wget')
     import wget
 import json
 import sys
@@ -20,7 +20,7 @@ try:
 
     from astropy.io import fits
 except:
-    os.system('%pip install astropy')
+    os.system('pip install astropy')
     import astropy
     
 from pathlib import Path
@@ -30,7 +30,7 @@ try:
     from requests.adapters import HTTPAdapter
     from requests.packages.urllib3.util.retry import Retry
 except:
-    os.system('%pip install requests')
+    os.system('pip install requests')
     import requests
     from requests.adapters import HTTPAdapter
     from requests.packages.urllib3.util.retry import Retry
@@ -40,13 +40,13 @@ try:
     from astrosource import TimeSeries
     from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
 except:
-    os.system('%pip install git+https://github.com/zemogle/astrosource@dev')
+    os.system('pip install git+https://github.com/zemogle/astrosource@dev')
     import astrosource
     from astrosource import TimeSeries
     from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
 
 def update_packages():
-    os.system('%pip install git+https://github.com/zemogle/astrosource@dev')
+    os.system('pip install git+https://github.com/zemogle/astrosource@dev')
     
 def download_frames_from_ptrarchive(location='.', frames=[]):
     
