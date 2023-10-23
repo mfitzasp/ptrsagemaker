@@ -59,10 +59,20 @@ def update_packages():
     
 
 def list_commands():
+    print ("analysis commands")
+    print ("******************")
     print ("download_frames_from_ptrarchive")
     print ("run_astrosource_on_photfiles")
+    print ("\nnavigation commands")
+    print ("******************")
+    print ("where_am_i")
+    print ("\nsystem commands")
+    print ("******************")
     print ("update_packages")
+
     
+def where_am_i():
+    print (os.cwd())
     
 def download_frames_from_ptrarchive(location='.', frames=[]):
     
