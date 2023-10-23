@@ -57,7 +57,11 @@ def update_packages():
     os.system('pip install -U numpy')
     print ("Packages updated. Please restart your console to use the latest packages.")
     
-    
+
+def list_commands():
+    print ("download_frames_from_ptrarchive")
+    print ("run_astrosource_on_photfiles")
+    print ("update_packages")
     
     
 def download_frames_from_ptrarchive(location='.', frames=[]):
