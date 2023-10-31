@@ -83,11 +83,32 @@ def remove_smartstacks_from_directory(directory):
             os.remove(f)
         except:
             pass    
-
+        
+# ptrsagemaker.remove_mispointed_frames('googy',295.2075,-27.6949,2)
 def remove_mispointed_frames(directory,ra,dec,radius, format='sek'):
     files=glob.glob(directory + '/*.'+format)
+    #print (files)
     for file in files:
-        breakpoint()
+        templist=numpy.genfromtxt(file, dtype=float, delimiter=',')
+        print ("Checking " + str(file) + " ......")
+        fileRA=numpy.nanmedian(templist[:,0])
+        fileDEC=numpy.nanmedian(templist[:,1])
+        del templist
+        if abs(ra-fileRA) > radius:
+            print ("Too far in RA! Rejecting this one")
+            try:
+                print ("Removing: " + str(file))
+                os.remove(file)
+            except:
+                pass
+        elif abs(dec-fileDEC) > radius:
+            print ("Too far in DEC! Rejecting this one")
+            try:
+                print ("Removing: " + str(file))
+                os.remove(file)
+            except:
+                pass
+    print ("Removing mispointed frames completed.")
 
 
 
