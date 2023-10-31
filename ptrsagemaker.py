@@ -114,6 +114,16 @@ def remove_mispointed_frames(directory,ra,dec,radius, format='sek'):
 def zip_folder(directory):
     shutil.make_archive(directory + '.zip', 'zip', directory)
     print ("Zipped " + str(directory))
+    
+
+def remove_small_filesizes(directory, format='sek'):
+    files=glob.glob(directory + '/*.'+format)
+    for file in files:
+        print (file)
+        file_stats = os.stat(file)
+        print(file_stats)
+        print(f'File Size in KiloBytes is {file_stats.st_size / (1024)}')
+
 
 def download_frames_from_ptrarchive(location='.', frames=[]):
     
