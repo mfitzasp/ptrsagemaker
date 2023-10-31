@@ -2,6 +2,7 @@
 
 import os
 import glob
+import shutil
 
 try:
     import numpy
@@ -110,7 +111,8 @@ def remove_mispointed_frames(directory,ra,dec,radius, format='sek'):
                 pass
     print ("Removing mispointed frames completed.")
 
-
+def zip_folder(directory):
+    shutil.make_archive(directory + '.zip', 'zip', directory)
 
 def download_frames_from_ptrarchive(location='.', frames=[]):
     
