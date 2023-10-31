@@ -84,6 +84,18 @@ def remove_smartstacks_from_directory(directory):
             os.remove(f)
         except:
             pass    
+    print ("Finished removing smartstacks")
+
+def remove_nonsmartstacks_from_directory(directory, format='sek'):
+    files = glob.glob(directory + '/*.' + str(format))
+    for f in files:
+        if 'SmSTACK' not in f:
+            print ("Removing nonsmartstack: " + str(f))
+            try:                
+                os.remove(f)
+            except:
+                pass    
+    print ("Finished removing non-smartstacks")
         
 # ptrsagemaker.remove_mispointed_frames('googy',295.2075,-27.6949,2)
 def remove_mispointed_frames(directory,ra,dec,radius, format='sek'):
