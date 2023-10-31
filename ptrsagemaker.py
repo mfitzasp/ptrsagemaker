@@ -127,7 +127,7 @@ def list_file_sizes(directory, format='sek'):
 def remove_small_filesizes(directory, smallest_size, format='sek'):
     files=glob.glob(directory + '/*.'+format)
     for file in files:
-        print (file)
+        #print (file)
         file_stats = os.stat(file)
         #print(file_stats)
         if (file_stats.st_size / (1024)) < smallest_size:
