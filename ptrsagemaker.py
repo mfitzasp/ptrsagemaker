@@ -74,6 +74,16 @@ def list_commands():
 def where_am_i():
     print (os.cwd())
     
+
+def remove_smartstacks_from_directory(directory):
+    files = glob.glob(directory + '/*SmSTACK*')
+    for f in files:
+        try:
+            print ("Removing: " + str(f))
+            os.remove(f)
+        except:
+            pass    
+
 def download_frames_from_ptrarchive(location='.', frames=[]):
     
     
