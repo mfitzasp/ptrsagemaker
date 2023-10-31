@@ -64,6 +64,7 @@ def list_commands():
     print ("******************")
     print ("download_frames_from_ptrarchive")
     print ("run_astrosource_on_photfiles")
+    print ("remove_smartstacks_from_directory")
     print ("\nnavigation commands")
     print ("******************")
     print ("where_am_i")
@@ -180,7 +181,7 @@ def download_frames_from_ptrarchive(location='.', frames=[]):
         with open(location + '/' + response.json()['filename'],'wb') as f:
             f.write(session.get(download_url).content)
         
-    breakpoint()
+    #breakpoint()
     
     print ("Download_frames_from_ptrarchive")
 
