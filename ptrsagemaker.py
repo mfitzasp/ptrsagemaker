@@ -84,6 +84,13 @@ def remove_smartstacks_from_directory(directory):
         except:
             pass    
 
+def remove_mispointed_frames(directory,ra,dec,radius, format='sek'):
+    files=glob.glob(directory + '/*.'+format)
+    for file in files:
+        breakpoint()
+
+
+
 def download_frames_from_ptrarchive(location='.', frames=[]):
     
     
