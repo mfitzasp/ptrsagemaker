@@ -116,13 +116,27 @@ def zip_folder(directory):
     print ("Zipped " + str(directory))
     
 
-def remove_small_filesizes(directory, format='sek'):
+def list_file_sizes(directory, format='sek'):
     files=glob.glob(directory + '/*.'+format)
     for file in files:
         print (file)
         file_stats = os.stat(file)
-        print(file_stats)
+        #print(file_stats)
         print(f'File Size in KiloBytes is {file_stats.st_size / (1024)}')
+
+def remove_small_filesizes(directory, smallest_size, format='sek'):
+    files=glob.glob(directory + '/*.'+format)
+    for file in files:
+        print (file)
+        file_stats = os.stat(file)
+        #print(file_stats)
+        if (file_stats.st_size / (1024)) < smallest_size:
+            print (file + " removed for being too small")
+            print(f'File Size in KiloBytes is {file_stats.st_size / (1024)}')
+            try:
+                print ("Removing: " + str(file))
+                os.remove(file)
+            except:
 
 
 def download_frames_from_ptrarchive(location='.', frames=[]):
