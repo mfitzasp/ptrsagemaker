@@ -113,6 +113,7 @@ def remove_mispointed_frames(directory,ra,dec,radius, format='sek'):
 
 def zip_folder(directory):
     shutil.make_archive(directory + '.zip', 'zip', directory)
+    print ("Zipped " + str(directory))
 
 def download_frames_from_ptrarchive(location='.', frames=[]):
     
