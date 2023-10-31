@@ -137,6 +137,7 @@ def remove_small_filesizes(directory, smallest_size, format='sek'):
                 print ("Removing: " + str(file))
                 os.remove(file)
             except:
+                pass
 
 
 def download_frames_from_ptrarchive(location='.', frames=[]):
