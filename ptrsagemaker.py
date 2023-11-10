@@ -15,6 +15,19 @@ try:
 except:
     os.system('pip install wget')
     import wget
+    
+# try:
+#     #import pydrive
+#     from pydrive.auth import GoogleAuth , GoogleDrive
+# except:
+#     os.system('pip install pydrive')
+#     from pydrive.auth import GoogleAuth , GoogleDrive
+try:
+    from PIL import Image, ImageFont, ImageDraw
+except:
+    os.system('pip install pillow')
+    from PIL import Image, ImageFont, ImageDraw
+
 import json
 import sys
 try:
@@ -184,6 +197,104 @@ def download_frames_from_ptrarchive(location='.', frames=[]):
     #breakpoint()
     
     print ("Download_frames_from_ptrarchive")
+
+
+
+def create_pdf_of_images(requestedimages, outputname):
+    
+    
+    fileList=glob.glob(requestedimages)
+    images=[]
+    for file in fileList:
+        print ("Collecting: " + str(file))
+        if 'png' in file:
+            img=Image.open(file).convert("RGB")
+        else:
+            img=Image.open(file)
+        
+        Im = ImageDraw.Draw(img)
+        Im.text((10, 10), file.split('/')[-1],fill=(0, 0, 0))
+        images.append(img)        
+    
+    images[0].save(outputname, "PDF" ,resolution=100.0, save_all=True, append_images=images[1:])
+        
+    
+    
+    
+    # img=Image.open(fileList[0])
+    # if 'png' in fileList[0]:
+    #     img=img.convert("RGB")
+    # fileshowing=fileList[0]
+    # index=0
+    # opt='z'
+    
+    
+    # images=[]
+    # for file in fileList:
+    #     print ("Collecting: " + str(file))
+    #     if 'png' in file:
+    #         images.append(Image.open(file).convert("RGB"))
+    #     else:
+    #         images.append(Image.open(file))
+        
+    # pdf_path = "googsplat.pdf"        
+    
+    # images[0].save(pdf_path, "PDF" ,resolution=100.0, save_all=True, append_images=images[1:])
+    
+    
+    
+    # while True:
+    #     #img.show()
+    #     print ("File " +str(index+1) + " Showing: " + str(fileshowing))
+    #     if index < len(fileList):
+    #         index=index+1
+    #         img=Image.open(fileList[index])
+    #         if 'png' in fileList[index]:
+    #             img=img.convert("RGB")
+                
+    #         fileshowing=fileList[index]
+            
+    
+    
+    
+    
+    # while opt != 'x':
+    #     img.show()
+    #     print ("File " +str(index+1) + " Showing: " + str(fileshowing))
+    #     while opt != 'x':
+    #         opt=input()
+    #         if opt == 'n':
+    #             if index < len(fileList):
+    #                 index=index+1
+    #                 img=Image.open(fileList[index])
+    #                 if 'png' in fileList[index]:
+    #                     img=img.convert("RGB")
+    #                 fileshowing=fileList[index]
+    #                 break
+    #             else:
+    #                 print ("reached end of list")
+    #         elif opt == 'p':
+    #             if index < len(fileList):
+    #                 index=index+1
+    #                 img=Image.open(fileList[index])
+    #                 if 'png' in fileList[index]:
+    #                     img=img.convert("RGB")
+    #                 fileshowing=fileList[index]
+    #                 break
+    #             else:
+    #                 print ("can't go past start of list")
+    #         elif opt == 'x':        
+    #             print ("cancelling out")
+    #         else:
+    #             print ("That was neither an n or a p or an x, try again")
+        
+                
+                    
+                
+                
+
+
+
 
 def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, variablehunt=False, notarget=False, lowestcounts=1800, usescreenedcomps=False, usepreviousvarsearch=False, \
     calibsave=False, outliererror=4, outlierstdev=4, varsearchglobalstdev=-99.9, varsearchstdev=2, varsearchmagwidth=0.5, \
