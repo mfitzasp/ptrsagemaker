@@ -447,13 +447,126 @@ def run_exotic_on_fits_files(directory=None):
 def run_astrosource_on_fits_files_then_exotic(directory=None):
     print ("Run astrosource then exotic on fits files")
     
-def form_exotic_init_file_from_fits_files(directory=None):    
+def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.json'):    
     print ("forming exotic inits file from fits files.")
     files = glob.glob(directory + '/*.f*')
+    
+    #Open the first file to get info
+    hduhold =fits.open(files[0])[0]
+    header=hduhold.header
+    
+    
+    inits_file={
+            "inits_guide": {
+            "Title": "EXOTIC's Initialization File",
+            "Comment": "Please answer all the following requirements below by following the format of the given",
+            "Comment1": "sample dataset HAT-P-32 b. Edit this file as needed to match the data wanting to be reduced.",
+            "Comment2": "Do not delete areas where there are quotation marks, commas, and brackets.",
+            "Comment3": "The inits_guide dictionary (these lines of text) does not have to be edited",
+            "Comment4": "and is only here to serve as a guide. Will be updated per user's advice.",
+            "Image Calibrations Directory Guide": "Enter in the path to image calibrations or enter in null for none.",
+            "Planetary Parameters Guide": "For planetary parameters that are not filled in, enter in null.",
+            "Comparison Star(s) Guide": "Up to 10 comparison stars can be added following the format given below.",
+            "Obs. Latitude Guide": "Indicate the sign (+ North, - South) before the degrees. Needs to be in decimal or HH:MM:SS format.",
+            "Obs. Longitude Guide": "Indicate the sign (+ East, - West) before the degrees. Needs to be in decimal or HH:MM:SS format.",
+            "Camera Type (1)": "If you are using a CMOS, please enter CCD in 'Camera Type (CCD or DSLR)' and then note",
+            "Camera Type (2)": "your actual camera type under 'Observing Notes'.",
+            "Plate Solution": "For your image to be given a plate solution, type y.",
+            "Plate Solution Disclaimer": "One of your imaging files will be publicly viewable on nova.astrometry.net.",
+            "Standard Filter": "To use EXOTIC standard filters, type only the filter name.",
+            "Custom Filter": "To use a custom filter, enter in the FWHM in optional_info.",
+            "Target Star RA": "Must be in HH:MM:SS sexagesimal format.",
+            "Target Star DEC": "Must be in +/-DD:MM:SS sexagesimal format with correct sign at the beginning (+ or -).",
+            "Demosaic Format": "Optional control for handling Bayer pattern color images - to use, provide Bayer color patttern of your camera (RGGB, BGGR, GRBG, GBRG) - null (no color processing) is default",
+            "Demosaic Output": "Select how to process color data (gray for grayscale, red or green or blue for single color channel, blueblock for grayscale without blue, [ R, G, B ] for custom weights for mixing colors.  green is default",
+            "Formatting of null": "Due to the file being a .json, null is case sensitive and must be spelled as shown.",
+            "Decimal Format": "Leading zero must be included when appropriate (Ex: 0.32, .32 or 00.32 causes errors.)."
+    },
+    "user_info": {
+            "Directory with FITS files": str(directory),
+            "Directory to Save Plots": str(directory),
+            "Directory of Flats": 'null',
+            "Directory of Darks": 'null',
+            "Directory of Biases": 'null',
+
+            "AAVSO Observer Code (blank if none)": "",
+            "Secondary Observer Codes (blank if none)": "",
+
+            "Observation date": header['DAY-OBS'],
+            "Obs. Latitude": header['LATITUDE'],
+            "Obs. Longitude": header['LONGITUD'],
+            "Obs. Elevation (meters)": header['HEIGHT'],
+            "Camera Type (CCD or DSLR)": "CCD",
+            "Pixel Binning": "1x1",
+            "Filter Name (aavso.org/filters)": header['FILTER'],
+            "Observing Notes": "",
+
+            "Plate Solution? (y/n)": "y",
+            "Add Comparison Stars from AAVSO? (y/n)": "y",
+
+            "Target Star X & Y Pixel": "[424, 286]",
+            "Comparison Star(s) X & Y Pixel": "[[465, 183], [512, 263], [], [], [], [], [], [], [], []]",
+
+            "Demosaic Format": 'null',
+            "Demosaic Output": 'null'
+    },
+    "planetary_parameters": {
+            "Target Star RA": header['ORIGRA'],
+            "Target Star Dec": header['ORIGDEC'],
+            "Planet Name": header['OBJECT'],
+            "Host Star Name": header['OBJECT'],
+            "Orbital Period (days)": "",
+            "Orbital Period Uncertainty": "",
+            "Published Mid-Transit Time (BJD-UTC)": "",
+            "Mid-Transit Time Uncertainty": "",
+            "Ratio of Planet to Stellar Radius (Rp/Rs)": "",
+            "Ratio of Planet to Stellar Radius (Rp/Rs) Uncertainty": "",
+            "Ratio of Distance to Stellar Radius (a/Rs)": "",
+            "Ratio of Distance to Stellar Radius (a/Rs) Uncertainty": "",
+            "Orbital Inclination (deg)": "",
+            "Orbital Inclination (deg) Uncertainty": "",
+            "Orbital Eccentricity (0 if null)": "",
+            "Argument of Periastron (deg)": "",
+            "Star Effective Temperature (K)": "",
+            "Star Effective Temperature (+) Uncertainty": "",
+            "Star Effective Temperature (-) Uncertainty": "",
+            "Star Metallicity ([FE/H])": "",
+            "Star Metallicity (+) Uncertainty": "",
+            "Star Metallicity (-) Uncertainty": "",
+            "Star Surface Gravity (log(g))": "",
+            "Star Surface Gravity (+) Uncertainty": "",
+            "Star Surface Gravity (-) Uncertainty": ""
+    },
+    "optional_info": {
+            "Pre-reduced File:": "",
+            "Pre-reduced File Time Format (BJD_TDB, JD_UTC, MJD_UTC)": "BJD_TDB",
+            "Pre-reduced File Units of Flux (flux, magnitude, millimagnitude)": "flux",
+
+            "Filter Minimum Wavelength (nm)": 'null',
+            "Filter Maximum Wavelength (nm)": 'null',
+
+            "Image Scale (Ex: 5.21 arcsecs/pixel)": header['PIXSCALE'],
+
+            "Exposure Time (s)": header['EXPTIME']
+        
+    }
+        
+        
+    
+        
+        
+        
+        }
+    # Store the JSON data in a file
+    with open(init_filename, "w") as file:
+        #json.dump(data, file)
+        json.dump(inits_file, file)
     breakpoint()
     
     
     
+# from ptrsagemaker import ptrsagemaker
+# ptrsagemaker.form_exotic_init_file_from_fits_files(directory='tristantoi')
 
 breakpoint()
     
