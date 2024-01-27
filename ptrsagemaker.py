@@ -466,38 +466,72 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     published_mid_transit_unc=input()
     print ("Ratio of Planet to Stellar Radius (Rp/Rs)")
     rp_to_rs=input()
+    if rp_to_rs == "":
+        rp_to_rs = 0.1
     print ("Ratio of Planet to Stellar Radius (Rp/Rs) Uncertainty")
     rp_to_rs_unc=input()
+    if rp_to_rs_unc == "":
+        rp_to_rs_unc = 0.5
     print ("Ratio of Distance to Stellar Radius (a/Rs)")
     a_to_rs=input()
+    if a_to_rs == "":
+        a_to_rs = 10
     print ("Ratio of Distance to Stellar Radius (a/Rs) Uncertainty")
     a_to_rs_unc=input()
+    if a_to_rs_unc == "":
+        a_to_rs_unc = 100
     print ("Orbital Inclination (deg)")
     inclination=input()
+    if inclination == "":
+        inclination = 85
     print ("Orbital Inclination (deg) Uncertainty")
     inclination_unc=input()
+    if inclination_unc == "":
+        inclination = 20
     print ("Orbital Eccentricity (0 if null)")
     eccentricity=input()
+    if eccentricity == "":
+        eccentricity = 0
     print ("Argument of Periastron (deg)")
     arg_periastron=input()
+    if arg_periastron == "":
+        arg_periastron = 0
     print ("Star Effective Temperature (K)")
     star_eff_temp=input()
+    if star_eff_temp == "":
+        star_eff_temp = 5500
     print ("Star Effective Temperature (+) Uncertainty")
     star_eff_temp_plusunc=input()
+    if star_eff_temp_plusunc == "":
+        star_eff_temp_plusunc = 200
     print ("Star Effective Temperature (-) Uncertainty")
     star_eff_temp_minusunc=input()
+    if star_eff_temp_minusunc == "":
+        star_eff_temp_minusunc = 200
     print ("Star Metallicity ([FE/H])")
     star_metal=input()
+    if star_metal == "":
+        star_metal = 0.0
     print ("Star Metallicity (+) Uncertainty")
     star_metal_plusunc=input()
+    if star_metal_plusunc == "":
+        star_metal_plusunc = 0.5
     print ("Star Metallicity (-) Uncertainty")
     star_metal_minusunc=input()
+    if star_metal_minusunc == "":
+        star_metal_minusunc = 0.5
     print ("Star Surface Gravity (log(g))")
     star_logg=input()
+    if star_logg == "":
+        star_logg = 4.5
     print ("Star Surface Gravity (+) Uncertainty")
     star_logg_plusunc=input()
+    if star_logg_plusunc == "":
+        star_logg_plusunc = 0.5
     print ("Star Surface Gravity (-) Uncertainty")
     star_logg_minusunc=input()
+    if star_logg_minusunc == "":
+        star_logg_minusunc = 0.5
     
     inits_file={
             "inits_guide": {
