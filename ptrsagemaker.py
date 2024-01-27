@@ -595,27 +595,27 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
             "Target Star Dec": header['ORIGDEC'],
             "Planet Name": header['OBJECT'],
             "Host Star Name": header['OBJECT'],
-            "Orbital Period (days)": period_days,
-            "Orbital Period Uncertainty": period_uncertainty,
-            "Published Mid-Transit Time (BJD-UTC)": published_mid_transit,
-            "Mid-Transit Time Uncertainty": published_mid_transit_unc,
-            "Ratio of Planet to Stellar Radius (Rp/Rs)": rp_to_rs,
-            "Ratio of Planet to Stellar Radius (Rp/Rs) Uncertainty": rp_to_rs_unc,
-            "Ratio of Distance to Stellar Radius (a/Rs)": a_to_rs,
-            "Ratio of Distance to Stellar Radius (a/Rs) Uncertainty": a_to_rs_unc,
-            "Orbital Inclination (deg)": inclination,
-            "Orbital Inclination (deg) Uncertainty": inclination_unc,
-            "Orbital Eccentricity (0 if null)": eccentricity,
-            "Argument of Periastron (deg)": arg_periastron,
-            "Star Effective Temperature (K)": star_eff_temp,
-            "Star Effective Temperature (+) Uncertainty": star_eff_temp_plusunc,
-            "Star Effective Temperature (-) Uncertainty": star_eff_temp_minusunc,
-            "Star Metallicity ([FE/H])": star_metal,
-            "Star Metallicity (+) Uncertainty": star_metal_plusunc,
-            "Star Metallicity (-) Uncertainty": star_metal_minusunc,
-            "Star Surface Gravity (log(g))": star_logg,
-            "Star Surface Gravity (+) Uncertainty": star_logg_plusunc,
-            "Star Surface Gravity (-) Uncertainty": star_logg_minusunc
+            "Orbital Period (days)": float(period_days),
+            "Orbital Period Uncertainty": float(period_uncertainty),
+            "Published Mid-Transit Time (BJD-UTC)": float(published_mid_transit),
+            "Mid-Transit Time Uncertainty": float(published_mid_transit_unc),
+            "Ratio of Planet to Stellar Radius (Rp/Rs)": float(rp_to_rs),
+            "Ratio of Planet to Stellar Radius (Rp/Rs) Uncertainty": float(rp_to_rs_unc),
+            "Ratio of Distance to Stellar Radius (a/Rs)": float(a_to_rs),
+            "Ratio of Distance to Stellar Radius (a/Rs) Uncertainty": float(a_to_rs_unc),
+            "Orbital Inclination (deg)": float(inclination),
+            "Orbital Inclination (deg) Uncertainty": float(inclination_unc),
+            "Orbital Eccentricity (0 if null)": float(eccentricity),
+            "Argument of Periastron (deg)": float(arg_periastron),
+            "Star Effective Temperature (K)": float(star_eff_temp),
+            "Star Effective Temperature (+) Uncertainty": float(star_eff_temp_plusunc),
+            "Star Effective Temperature (-) Uncertainty": float(star_eff_temp_minusunc),
+            "Star Metallicity ([FE/H])": float(star_metal),
+            "Star Metallicity (+) Uncertainty": float(star_metal_plusunc),
+            "Star Metallicity (-) Uncertainty": float(star_metal_minusunc),
+            "Star Surface Gravity (log(g))": float(star_logg),
+            "Star Surface Gravity (+) Uncertainty": float(star_logg_plusunc),
+            "Star Surface Gravity (-) Uncertainty": float(star_logg_minusunc)
     },
     "optional_info": {
             "Pre-reduced File:": "",
@@ -625,9 +625,9 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
             "Filter Minimum Wavelength (nm)": 'null',
             "Filter Maximum Wavelength (nm)": 'null',
 
-            "Image Scale (Ex: 5.21 arcsecs/pixel)": header['PIXSCALE'],
+            "Image Scale (Ex: 5.21 arcsecs/pixel)": float(header['PIXSCALE']),
 
-            "Exposure Time (s)": header['EXPTIME']
+            "Exposure Time (s)": float(header['EXPTIME'])
         
     }
         
