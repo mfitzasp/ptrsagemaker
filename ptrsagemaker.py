@@ -15,7 +15,14 @@ try:
 except:
     os.system('pip install wget')
     import wget
+
     
+try:
+    import bokeh
+except:
+    os.system('pip install bokeh')
+    import bokeh
+
 # try:
 #     #import pydrive
 #     from pydrive.auth import GoogleAuth , GoogleDrive
@@ -61,6 +68,14 @@ except:
     from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
     import tqdm
 
+try:
+    from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
+except:
+    os.system('pip install exotic --upgrade')
+    from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
+
+
+
 def update_packages():
     os.system('pip install -U tqdm')
     os.system('pip uninstall -y astrosource')
@@ -69,6 +84,7 @@ def update_packages():
     os.system('pip install -U wget')
     os.system('pip install -U astropy')
     os.system('pip install -U numpy')
+    os.system('pip install -U setuptools')
     print ("Packages updated. Please restart your console to use the latest packages.")
     
 
