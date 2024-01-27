@@ -487,7 +487,7 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     print ("Orbital Inclination (deg) Uncertainty")
     inclination_unc=input()
     if inclination_unc == "":
-        inclination = 20
+        inclination_unc = 20
     print ("Orbital Eccentricity (0 if null)")
     eccentricity=input()
     if eccentricity == "":
