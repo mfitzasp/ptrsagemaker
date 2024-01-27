@@ -69,9 +69,11 @@ except:
     import tqdm
 
 try:
+    import exotic
     from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
 except:
-    os.system('pip install exotic --upgrade')
+    os.system('pip install git+https://github.com/mfitzasp/ptrEXOTIC@main')
+    import exotic
     from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
 
 
@@ -437,6 +439,21 @@ def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, 
     print("✅ AstroSource analysis complete\n")
 
 #download_frames_from_ptrarchive()
+
+
+def run_exotic_on_fits_files(directory=None):
+    print ("Run exotic on fits files")
+    
+def run_astrosource_on_fits_files_then_exotic(directory=None):
+    print ("Run astrosource then exotic on fits files")
+    
+def form_exotic_init_file_from_fits_files(directory=None):    
+    print ("forming exotic inits file from fits files.")
+    files = glob.glob(directory + '/*.f*')
+    breakpoint()
+    
+    
+    
 
 breakpoint()
     
