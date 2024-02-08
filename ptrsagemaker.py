@@ -56,6 +56,31 @@ except:
     from requests.adapters import HTTPAdapter
     from requests.packages.urllib3.util.retry import Retry
 
+
+#### CREATE EXOTIC LDTK DIRECTORY
+if not os.path.exists('/home/studio-lab-user/ldtables/'):
+    os.makedirs('/home/studio-lab-user/ldtables/')
+if not os.path.exists('/home/studio-lab-user/ldtables/Z+0.5'):
+    os.makedirs('/home/studio-lab-user/ldtables/Z+0.5')
+if not os.path.exists('/home/studio-lab-user/ldtables/Z+1.0'):
+    os.makedirs('/home/studio-lab-user/ldtables/Z+1.0')
+if not os.path.exists('/home/studio-lab-user/ldtables/Z-0.0'):
+    os.makedirs('/home/studio-lab-user/ldtables/Z-0.0')
+if not os.path.exists('/home/studio-lab-user/ldtables/Z-0.5'):
+    os.makedirs('/home/studio-lab-user/ldtables/Z-0.5')
+if not os.path.exists('/home/studio-lab-user/ldtables/Z-1.0'):
+    os.makedirs('/home/studio-lab-user/ldtables/Z-1.0')
+if not os.path.exists('/home/studio-lab-user/ldtables/Z-1.5'):
+    os.makedirs('/home/studio-lab-user/ldtables/Z-1.5')
+if not os.path.exists('/home/studio-lab-user/ldtables/Z-2.0'):
+    os.makedirs('/home/studio-lab-user/ldtables/Z-2.0')
+if not os.path.exists('/home/studio-lab-user/ldtables/Z-3.0'):
+    os.makedirs('/home/studio-lab-user/ldtables/Z-3.0')
+if not os.path.exists('/home/studio-lab-user/ldtables/Z-4.0'):
+    os.makedirs('/home/studio-lab-user/ldtables/Z-4.0')
+
+
+
 try:
     import astrosource
     from astrosource import TimeSeries
