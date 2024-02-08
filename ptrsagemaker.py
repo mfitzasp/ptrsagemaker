@@ -94,6 +94,13 @@ except:
     import tqdm
 
 try:
+    import numba
+except:
+    os.system('pip install -U numba')
+    import numba
+    
+
+try:
     import exotic
     from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
 except:
