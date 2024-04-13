@@ -138,6 +138,12 @@ def list_commands():
 def where_am_i():
     print (os.cwd())
     
+    
+def link_ldtk_to_oss():
+    wget.download('https://www.oursolarsiblings.com/ldtk.doot')
+    os.rename('ldtk.doot','ldtk.py')
+    os.system('cp ldtk.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
+    
 
 def remove_smartstacks_from_directory(directory):
     files = glob.glob(directory + '/*SmSTACK*')
