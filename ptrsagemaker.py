@@ -144,6 +144,10 @@ def link_ldtk_to_oss():
     os.rename('ldtk.doot','ldtk.py')
     os.system('mv ldtk.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
     
+    wget.download('https://www.oursolarsiblings.com/client.doot')
+    os.rename('client.doot','client.py')
+    os.system('mv client.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/client.py')
+    
 
 def remove_smartstacks_from_directory(directory):
     files = glob.glob(directory + '/*SmSTACK*')
@@ -476,6 +480,10 @@ def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, 
     print("✅ AstroSource analysis complete\n")
 
 #download_frames_from_ptrarchive()
+
+def run_exotic_on_prereduced_files():
+    import exotic.exotic
+    exotic.exotic.main(prereduced=True)
 
 
 def run_exotic_on_fits_files(directory=None):
