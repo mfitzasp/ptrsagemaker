@@ -460,7 +460,7 @@ def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, 
                         )
     
     if full or comparison:
-        ts.analyse(usescreenedcomps=usescreenedcomps, usecompsused=usecompsused, usecompletedcalib=usecompletedcalib)
+        ts.analyse(usescreenedcomps=usescreenedcomps, usecompsused=usecompsused, usecompletedcalib=usecompletedcalib, calib=calib)
 
 
     if (full or calc) and varsearch and not usepreviousvarsearch :
