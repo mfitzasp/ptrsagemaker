@@ -177,7 +177,9 @@ def test_run_exotic_on_wasp_data():
     run_exotic_on_prereduced_files('waspsample/outputcats/V1_calibEXOTIC.csv', 'waspsample/init.json', check_exoarchive_values=False)
     
     
-    
+def run_exotic_on_phot_files(directory, ra=0.0, dec=0.0):
+
+    print ('yay')    
     
 
 
@@ -549,10 +551,14 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     period_days=input()
     print ("Orbital Period Uncertainty")    
     period_uncertainty=input()
+    if float(period_uncertainty) < 0.001:
+        period_uncertainty = 0.001
     print ("Published Mid-Transit Time (BJD-UTC)")
     published_mid_transit=input()
     print ("Mid-Transit Time Uncertainty")
     published_mid_transit_unc=input()
+    if float(published_mid_transit_unc) < 0.001:
+        published_mid_transit_unc = 0.001
     print ("Ratio of Planet to Stellar Radius (Rp/Rs)")
     rp_to_rs=input()
     if rp_to_rs == "":
@@ -561,6 +567,8 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     rp_to_rs_unc=input()
     if rp_to_rs_unc == "":
         rp_to_rs_unc = 0.5
+    if float(rp_to_rs_unc) < 0.1:
+        rp_to_rs_unc = 0.1
     print ("Ratio of Distance to Stellar Radius (a/Rs)")
     a_to_rs=input()
     if a_to_rs == "":
@@ -569,14 +577,19 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     a_to_rs_unc=input()
     if a_to_rs_unc == "":
         a_to_rs_unc = 100
+    if float(a_to_rs_unc) < 0.1:
+        a_to_rs_unc = 0.1
     print ("Orbital Inclination (deg)")
     inclination=input()
     if inclination == "":
         inclination = 85
+    
     print ("Orbital Inclination (deg) Uncertainty")
     inclination_unc=input()
     if inclination_unc == "":
         inclination_unc = 20
+    if float(inclination_unc) < 5:
+        inclination_unc = 5
     print ("Orbital Eccentricity (0 if null)")
     eccentricity=input()
     if eccentricity == "":
