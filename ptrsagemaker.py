@@ -502,9 +502,9 @@ def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, 
 
 #download_frames_from_ptrarchive()
 
-def run_exotic_on_prereduced_files():
+def run_exotic_on_prereduced_files(prereduced_filename):
     import exotic.exotic
-    exotic.exotic.main(prereduced=True)
+    exotic.exotic.main(prereduced=True, prereduced_filename=prereduced_filename)
 
 
 def run_exotic_on_fits_files(directory=None):
