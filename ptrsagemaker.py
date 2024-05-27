@@ -138,7 +138,17 @@ def list_commands():
 def where_am_i():
     print (os.cwd())
     
+
+def download_wasp43_sampledata():
+    wget.download('https://www.oursolarsiblings.com/wasp43b_sampledata.zip')
+    if not os.path.exists('waspsample'):
+        os.makedirs('waspsample')
+    #shutil.move('wasp43b_sea.zip','waspsample/wasp43b_sea.zip')
+    shutil.unpack_archive('wasp43b_sampledata.zip', 'waspsample')
     
+    
+
+
 def link_ldtk_to_oss():
     wget.download('https://www.oursolarsiblings.com/ldtk.doot')
     os.rename('ldtk.doot','ldtk.py')
