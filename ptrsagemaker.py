@@ -103,6 +103,18 @@ except:
     from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
     # Need to patch over the limb darkening tables as the default tries to link to an ftp server that blocks AWS for some reason
     #wget.download('https://www.solarsiblings.com/ldtables/ldtk.py', out='~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
+    #def link_ldtk_to_oss():
+        
+if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
+    wget.download('https://www.oursolarsiblings.com/ldtk.doot')
+    if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
+        os.system('cp ldtk.doot ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot')
+    os.rename('ldtk.doot','ldtk.py')
+    os.system('mv ldtk.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
+    
+    wget.download('https://www.oursolarsiblings.com/client.doot')
+    os.rename('client.doot','client.py')
+    os.system('mv client.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/client.py')
     
 
 print ("********************")
@@ -118,6 +130,7 @@ def update_packages():
     os.system('pip install -U astropy')
     os.system('pip install -U numpy')
     os.system('pip install -U setuptools')
+    os.system('pip install git+https://github.com/mfitzasp/ptrEXOTIC@main')
     print ("Packages updated. Please restart your console to use the latest packages.")
     
 
@@ -151,10 +164,17 @@ def download_wasp43_sampledata():
     
     
 def test_run_exotic_on_wasp_data():
+    
+    # Create inits file from fits file
+    if not os.path.exists('waspsample/init.json'):
+        form_exotic_init_file_from_fits_files(directory='waspsample', init_filename='waspsample/init.json')
+    
     # Run astrosource to get transit observation
     run_astrosource_on_photfiles('waspsample', ra=154.9083708,dec=-9.8062778, format='sea', period=False)
-    # Create inits file from fits file
-    form_exotic_init_file_from_fits_files(directory='waspsample', init_filename='waspsample/init.json')
+    
+    # Then run EXOTIC on resulting files
+    run_exotic_on_prereduced_files('waspsample/outputcats/V1_calibEXOTIC.csv', 'waspsample/init.json')
+    
     
     
     
@@ -162,6 +182,8 @@ def test_run_exotic_on_wasp_data():
 
 def link_ldtk_to_oss():
     wget.download('https://www.oursolarsiblings.com/ldtk.doot')
+    if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
+        os.system('cp ldtk.doot ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot')
     os.rename('ldtk.doot','ldtk.py')
     os.system('mv ldtk.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
     
