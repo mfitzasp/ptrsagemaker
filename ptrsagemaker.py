@@ -174,7 +174,7 @@ def test_run_exotic_on_wasp_data():
         run_astrosource_on_photfiles('waspsample', ra=154.9083708,dec=-9.8062778, format='sea', period=False)
     
     # Then run EXOTIC on resulting files
-    run_exotic_on_prereduced_files('waspsample/outputcats/V1_calibEXOTIC.csv', 'waspsample/init.json')
+    run_exotic_on_prereduced_files('waspsample/outputcats/V1_calibEXOTIC.csv', 'waspsample/init.json', check_exoarchive_values=False)
     
     
     
@@ -525,9 +525,9 @@ def run_astrosource_on_photfiles(indir, full=True, stars=True, comparison=True, 
 
 #download_frames_from_ptrarchive()
 
-def run_exotic_on_prereduced_files(prereduced_filename, inits_filename):
+def run_exotic_on_prereduced_files(prereduced_filename, inits_filename, check_exoarchive_values):
     import exotic.exotic
-    exotic.exotic.main(prereduced=True, prereduced_filename=prereduced_filename, inits_filename=inits_filename)
+    exotic.exotic.main(prereduced=True, prereduced_filename=prereduced_filename, inits_filename=inits_filename, check_exoarchive_values=check_exoarchive_values)
 
 
 def run_exotic_on_fits_files(directory=None):
