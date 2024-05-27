@@ -170,7 +170,8 @@ def test_run_exotic_on_wasp_data():
         form_exotic_init_file_from_fits_files(directory='waspsample', init_filename='waspsample/init.json')
     
     # Run astrosource to get transit observation
-    run_astrosource_on_photfiles('waspsample', ra=154.9083708,dec=-9.8062778, format='sea', period=False)
+    if not os.path.exists('waspsample/outputcats/V1_calibEXOTIC.csv'):
+        run_astrosource_on_photfiles('waspsample', ra=154.9083708,dec=-9.8062778, format='sea', period=False)
     
     # Then run EXOTIC on resulting files
     run_exotic_on_prereduced_files('waspsample/outputcats/V1_calibEXOTIC.csv', 'waspsample/init.json')
