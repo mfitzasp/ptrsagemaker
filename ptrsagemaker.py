@@ -146,6 +146,17 @@ def download_wasp43_sampledata():
     #shutil.move('wasp43b_sea.zip','waspsample/wasp43b_sea.zip')
     shutil.unpack_archive('wasp43b_sampledata.zip', 'waspsample')
     
+    wget.download('http://www.oursolarsiblings.com/lsc0m412-kb26-20180222-0358-e91.fits')
+    shutil.move('lsc0m412-kb26-20180222-0358-e91.fits', 'waspsample')
+    
+    
+def test_run_exotic_on_wasp_data():
+    # Run astrosource to get transit observation
+    run_astrosource_on_photfiles('waspsample', ra=154.9083708,dec=-9.8062778, format='sea', period=False)
+    # Create inits file from fits file
+    form_exotic_init_file_from_fits_files(directory='waspsample', init_filename='waspsample/init.json')
+    
+    
     
 
 
@@ -588,6 +599,14 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     if star_logg_minusunc == "":
         star_logg_minusunc = 0.5
     
+    try:
+        tempRAin= header['RA-HMS']
+        tempDECin= header['DEC-DMS']
+    except:
+        tempRAin= header['RA']
+        tempDECin= header['DEC']
+    
+    
     inits_file={
             "inits_guide": {
             "Title": "EXOTIC's Initialization File",
@@ -643,11 +662,10 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
             "Demosaic Output": 'null'
     },        
     
-
     
     "planetary_parameters": {
-            "Target Star RA": header['ORIGRA'],
-            "Target Star Dec": header['ORIGDEC'],
+            "Target Star RA": tempRAin,
+            "Target Star Dec": tempDECin,
             "Planet Name": header['OBJECT'],
             "Host Star Name": header['OBJECT'],
             "Orbital Period (days)": float(period_days),
