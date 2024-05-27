@@ -714,7 +714,9 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     with open(init_filename, "w") as file:
         #json.dump(data, file)
         json.dump(inits_file, file)
-    breakpoint()
+    
+    print ("inits file written.")
+    #breakpoint()
     
     
     
