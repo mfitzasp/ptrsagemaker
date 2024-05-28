@@ -177,9 +177,19 @@ def test_run_exotic_on_wasp_data():
     run_exotic_on_prereduced_files('waspsample/outputcats/V1_calibEXOTIC.csv', 'waspsample/init.json', check_exoarchive_values=False)
     
     
-def run_exotic_on_phot_files(directory, ra=0.0, dec=0.0):
+def run_exotic_on_phot_files(directory, ra=0.0, dec=0.0, photformat='psx'):
 
     print ('yay')    
+    
+    if not os.path.exists(directory + '/init.json'):
+        form_exotic_init_file_from_fits_files(directory=directory, init_filename=directory + '/init.json')
+        
+    # Run astrosource to get transit observation
+    if not os.path.exists(directory +'/outputcats/V1_calibEXOTIC.csv'):
+        run_astrosource_on_photfiles(directory, ra=ra,dec=dec, photformat=format, period=False)
+        
+    # Then run EXOTIC on resulting files
+    run_exotic_on_prereduced_files(directory +'/outputcats/V1_calibEXOTIC.csv', directory +'/init.json', check_exoarchive_values=False)
     
 
 
