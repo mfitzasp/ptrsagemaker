@@ -564,7 +564,9 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
         period_days=input()
     print ("Orbital Period Uncertainty. (Press ENTER if you do not know)")    
     period_uncertainty=input()
-    if float(period_uncertainty) < 0.001 or period_uncertainty == "":
+    if period_uncertainty == "":
+        period_uncertainty = 0.001        
+    elif float(period_uncertainty) < 0.001:
         period_uncertainty = 0.001
     
     published_mid_transit=""
@@ -573,7 +575,7 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
         published_mid_transit=input()
     print ("Mid-Transit Time Uncertainty")
     published_mid_transit_unc=input()
-    if period_uncertainty == "":
+    if published_mid_transit_unc == "":
         published_mid_transit_unc = 0.001
     elif float(published_mid_transit_unc) < 0.001:
         published_mid_transit_unc = 0.001
