@@ -592,11 +592,11 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     print ("Ratio of Distance to Stellar Radius (a/Rs). (Press ENTER if you do not know)")
     a_to_rs=input()
     if a_to_rs == "":
-        a_to_rs = 10
+        a_to_rs = 20
     print ("Ratio of Distance to Stellar Radius (a/Rs) Uncertainty. (Press ENTER if you do not know)")
     a_to_rs_unc=input()
     if a_to_rs_unc == "":
-        a_to_rs_unc = 100
+        a_to_rs_unc = 15
     if float(a_to_rs_unc) < 0.1:
         a_to_rs_unc = 0.1
     print ("Orbital Inclination (deg). (Press ENTER if you do not know)")
