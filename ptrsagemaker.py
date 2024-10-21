@@ -573,7 +573,7 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     while published_mid_transit=="":
         print ("Published Mid-Transit Time (BJD-UTC preferred or JD or HJD). This is NEEDED.")
         published_mid_transit=input()
-    print ("Mid-Transit Time Uncertainty")
+    print ("Mid-Transit Time Uncertainty. (Press ENTER if you do not know)")
     published_mid_transit_unc=input()
     if published_mid_transit_unc == "":
         published_mid_transit_unc = 0.001
