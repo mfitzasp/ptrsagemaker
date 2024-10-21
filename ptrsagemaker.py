@@ -582,11 +582,11 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     print ("Ratio of Planet to Stellar Radius (Rp/Rs). (Press ENTER if you do not know)")
     rp_to_rs=input()
     if rp_to_rs == "":
-        rp_to_rs = 0.1
+        rp_to_rs = 0.15
     print ("Ratio of Planet to Stellar Radius (Rp/Rs) Uncertainty. (Press ENTER if you do not know)")
     rp_to_rs_unc=input()
     if rp_to_rs_unc == "":
-        rp_to_rs_unc = 0.5
+        rp_to_rs_unc = 0.125
     if float(rp_to_rs_unc) < 0.1:
         rp_to_rs_unc = 0.1
     print ("Ratio of Distance to Stellar Radius (a/Rs). (Press ENTER if you do not know)")
