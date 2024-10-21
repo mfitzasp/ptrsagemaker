@@ -557,90 +557,96 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     header=hduhold.header
     
         
-    print ("Orbital Period (days)")
-    period_days=input()
-    print ("Orbital Period Uncertainty")    
+    
+    period_days=""
+    while period_days=="":
+        print ("Orbital Period (days). This is NEEDED.")
+        period_days=input()
+    print ("Orbital Period Uncertainty. (Press ENTER if you do not know)")    
     period_uncertainty=input()
-    if float(period_uncertainty) < 0.001:
+    if float(period_uncertainty) < 0.001 or period_uncertainty == "":
         period_uncertainty = 0.001
-    print ("Published Mid-Transit Time (BJD-UTC)")
-    published_mid_transit=input()
+    
+    published_mid_transit=""
+    while published_mid_transit=="":
+        print ("Published Mid-Transit Time (BJD-UTC). This is NEEDED.")
+        published_mid_transit=input()
     print ("Mid-Transit Time Uncertainty")
     published_mid_transit_unc=input()
     if float(published_mid_transit_unc) < 0.001:
         published_mid_transit_unc = 0.001
-    print ("Ratio of Planet to Stellar Radius (Rp/Rs)")
+    print ("Ratio of Planet to Stellar Radius (Rp/Rs). (Press ENTER if you do not know)")
     rp_to_rs=input()
     if rp_to_rs == "":
         rp_to_rs = 0.1
-    print ("Ratio of Planet to Stellar Radius (Rp/Rs) Uncertainty")
+    print ("Ratio of Planet to Stellar Radius (Rp/Rs) Uncertainty. (Press ENTER if you do not know)")
     rp_to_rs_unc=input()
     if rp_to_rs_unc == "":
         rp_to_rs_unc = 0.5
     if float(rp_to_rs_unc) < 0.1:
         rp_to_rs_unc = 0.1
-    print ("Ratio of Distance to Stellar Radius (a/Rs)")
+    print ("Ratio of Distance to Stellar Radius (a/Rs). (Press ENTER if you do not know)")
     a_to_rs=input()
     if a_to_rs == "":
         a_to_rs = 10
-    print ("Ratio of Distance to Stellar Radius (a/Rs) Uncertainty")
+    print ("Ratio of Distance to Stellar Radius (a/Rs) Uncertainty. (Press ENTER if you do not know)")
     a_to_rs_unc=input()
     if a_to_rs_unc == "":
         a_to_rs_unc = 100
     if float(a_to_rs_unc) < 0.1:
         a_to_rs_unc = 0.1
-    print ("Orbital Inclination (deg)")
+    print ("Orbital Inclination (deg). (Press ENTER if you do not know)")
     inclination=input()
     if inclination == "":
         inclination = 85
     
-    print ("Orbital Inclination (deg) Uncertainty")
+    print ("Orbital Inclination (deg) Uncertainty. (Press ENTER if you do not know)")
     inclination_unc=input()
     if inclination_unc == "":
         inclination_unc = 20
     if float(inclination_unc) < 5:
         inclination_unc = 5
-    print ("Orbital Eccentricity (0 if null)")
+    print ("Orbital Eccentricity (0 if null). (Press ENTER if you do not know)")
     eccentricity=input()
     if eccentricity == "":
         eccentricity = 0
-    print ("Argument of Periastron (deg)")
+    print ("Argument of Periastron (deg). (Press ENTER if you do not know)")
     arg_periastron=input()
     if arg_periastron == "":
         arg_periastron = 0
-    print ("Star Effective Temperature (K)")
+    print ("Star Effective Temperature (K). (Press ENTER if you do not know)")
     star_eff_temp=input()
     if star_eff_temp == "":
         star_eff_temp = 5500
-    print ("Star Effective Temperature (+) Uncertainty")
+    print ("Star Effective Temperature (+) Uncertainty. (Press ENTER if you do not know)")
     star_eff_temp_plusunc=input()
     if star_eff_temp_plusunc == "":
         star_eff_temp_plusunc = 200
-    print ("Star Effective Temperature (-) Uncertainty")
+    print ("Star Effective Temperature (-) Uncertainty. (Press ENTER if you do not know)")
     star_eff_temp_minusunc=input()
     if star_eff_temp_minusunc == "":
         star_eff_temp_minusunc = 200
-    print ("Star Metallicity ([FE/H])")
+    print ("Star Metallicity ([FE/H]). (Press ENTER if you do not know)")
     star_metal=input()
     if star_metal == "":
         star_metal = 0.0
-    print ("Star Metallicity (+) Uncertainty")
+    print ("Star Metallicity (+) Uncertainty. (Press ENTER if you do not know)")
     star_metal_plusunc=input()
     if star_metal_plusunc == "":
         star_metal_plusunc = 0.5
-    print ("Star Metallicity (-) Uncertainty")
+    print ("Star Metallicity (-) Uncertainty. (Press ENTER if you do not know)")
     star_metal_minusunc=input()
     if star_metal_minusunc == "":
         star_metal_minusunc = 0.5
-    print ("Star Surface Gravity (log(g))")
+    print ("Star Surface Gravity (log(g)). (Press ENTER if you do not know)")
     star_logg=input()
     if star_logg == "":
         star_logg = 4.5
-    print ("Star Surface Gravity (+) Uncertainty")
+    print ("Star Surface Gravity (+) Uncertainty. (Press ENTER if you do not know)")
     star_logg_plusunc=input()
     if star_logg_plusunc == "":
         star_logg_plusunc = 0.5
-    print ("Star Surface Gravity (-) Uncertainty")
+    print ("Star Surface Gravity (-) Uncertainty. (Press ENTER if you do not know)")
     star_logg_minusunc=input()
     if star_logg_minusunc == "":
         star_logg_minusunc = 0.5
