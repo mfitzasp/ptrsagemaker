@@ -569,11 +569,13 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
     
     published_mid_transit=""
     while published_mid_transit=="":
-        print ("Published Mid-Transit Time (BJD-UTC). This is NEEDED.")
+        print ("Published Mid-Transit Time (BJD-UTC preferred or JD or HJD). This is NEEDED.")
         published_mid_transit=input()
     print ("Mid-Transit Time Uncertainty")
     published_mid_transit_unc=input()
-    if float(published_mid_transit_unc) < 0.001:
+    if period_uncertainty == "":
+        published_mid_transit_unc = 0.001
+    elif float(published_mid_transit_unc) < 0.001:
         published_mid_transit_unc = 0.001
     print ("Ratio of Planet to Stellar Radius (Rp/Rs). (Press ENTER if you do not know)")
     rp_to_rs=input()
