@@ -35,7 +35,7 @@ try:
 
     from astropy.io import fits
 except:
-    os.system('pip install astropy')
+    os.system('pip install astropy==5.3.4 exotic ocs-archive ocs-ingester')
     import astropy
     
 from pathlib import Path
@@ -52,26 +52,30 @@ except:
 
 
 #### CREATE EXOTIC LDTK DIRECTORY
-if not os.path.exists('/home/studio-lab-user/ldtables/'):
-    os.makedirs('/home/studio-lab-user/ldtables/')
-if not os.path.exists('/home/studio-lab-user/ldtables/Z+0.5'):
-    os.makedirs('/home/studio-lab-user/ldtables/Z+0.5')
-if not os.path.exists('/home/studio-lab-user/ldtables/Z+1.0'):
-    os.makedirs('/home/studio-lab-user/ldtables/Z+1.0')
-if not os.path.exists('/home/studio-lab-user/ldtables/Z-0.0'):
-    os.makedirs('/home/studio-lab-user/ldtables/Z-0.0')
-if not os.path.exists('/home/studio-lab-user/ldtables/Z-0.5'):
-    os.makedirs('/home/studio-lab-user/ldtables/Z-0.5')
-if not os.path.exists('/home/studio-lab-user/ldtables/Z-1.0'):
-    os.makedirs('/home/studio-lab-user/ldtables/Z-1.0')
-if not os.path.exists('/home/studio-lab-user/ldtables/Z-1.5'):
-    os.makedirs('/home/studio-lab-user/ldtables/Z-1.5')
-if not os.path.exists('/home/studio-lab-user/ldtables/Z-2.0'):
-    os.makedirs('/home/studio-lab-user/ldtables/Z-2.0')
-if not os.path.exists('/home/studio-lab-user/ldtables/Z-3.0'):
-    os.makedirs('/home/studio-lab-user/ldtables/Z-3.0')
-if not os.path.exists('/home/studio-lab-user/ldtables/Z-4.0'):
-    os.makedirs('/home/studio-lab-user/ldtables/Z-4.0')
+
+
+homedir=os.path.expanduser('~')
+
+if not os.path.exists(homedir+'/ldtables/'):
+    os.makedirs(homedir+'/ldtables/')
+if not os.path.exists(homedir+'/ldtables/Z+0.5'):
+    os.makedirs(homedir+'/ldtables/Z+0.5')
+if not os.path.exists(homedir+'/ldtables/Z+1.0'):
+    os.makedirs(homedir+'/ldtables/Z+1.0')
+if not os.path.exists(homedir+'/ldtables/Z-0.0'):
+    os.makedirs(homedir+'/ldtables/Z-0.0')
+if not os.path.exists(homedir+'/ldtables/Z-0.5'):
+    os.makedirs(homedir+'/ldtables/Z-0.5')
+if not os.path.exists(homedir+'/ldtables/Z-1.0'):
+    os.makedirs(homedir+'/ldtables/Z-1.0')
+if not os.path.exists(homedir+'/ldtables/Z-1.5'):
+    os.makedirs(homedir+'/ldtables/Z-1.5')
+if not os.path.exists(homedir+'/ldtables/Z-2.0'):
+    os.makedirs(homedir+'/ldtables/Z-2.0')
+if not os.path.exists(homedir+'/ldtables/Z-3.0'):
+    os.makedirs(homedir+'/ldtables/Z-3.0')
+if not os.path.exists(homedir+'/ldtables/Z-4.0'):
+    os.makedirs(homedir+'/ldtables/Z-4.0')
 
 
 
@@ -80,6 +84,7 @@ try:
     from astrosource import TimeSeries
     from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
 except:
+    os.system('pip install astrosource')
     os.system('pip install git+https://github.com/zemogle/astrosource@dev')
     os.system('pip install tqdm')
     import astrosource
@@ -98,6 +103,7 @@ try:
     import exotic
     from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
 except:
+    os.system('pip install exotic')
     os.system('pip install git+https://github.com/mfitzasp/ptrEXOTIC@main')
     import exotic
     from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
