@@ -3,6 +3,7 @@
 import os
 import glob
 import shutil
+import traceback
 
 try:
     import numpy
@@ -98,19 +99,24 @@ except:
     os.system('pip install -U numba')
     import numba
     
-
 try:
-    import exotic
-    from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
+    try:
+        import exotic
+        from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
+    except:
+        os.system('pip install exotic')
+        os.system('pip install git+https://github.com/mfitzasp/ptrEXOTIC@main')
+        import exotic
+        from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
+        # Need to patch over the limb darkening tables as the default tries to link to an ftp server that blocks AWS for some reason
+        #wget.download('https://www.solarsiblings.com/ldtables/ldtk.py', out='~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
+        #def link_ldtk_to_oss():
 except:
-    os.system('pip install exotic')
-    os.system('pip install git+https://github.com/mfitzasp/ptrEXOTIC@main')
-    import exotic
-    from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
-    # Need to patch over the limb darkening tables as the default tries to link to an ftp server that blocks AWS for some reason
-    #wget.download('https://www.solarsiblings.com/ldtables/ldtk.py', out='~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
-    #def link_ldtk_to_oss():
-        
+    print ("EXOTIC IMPORT FAILED")
+    print(traceback.format_exc())
+            
+
+
 if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
     wget.download('https://www.oursolarsiblings.com/ldtk.doot')
     if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
