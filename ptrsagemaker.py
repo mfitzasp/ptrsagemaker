@@ -105,6 +105,7 @@ try:
         from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
     except:
         os.system('pip install exotic')
+        os.system('pip install --upgrade setuptools')
         os.system('pip install git+https://github.com/mfitzasp/ptrEXOTIC@main')
         import exotic
         from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
@@ -116,18 +117,42 @@ except:
     print(traceback.format_exc())
             
 
-
-if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
-    wget.download('https://www.oursolarsiblings.com/ldtk.doot')
+try:
     if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
-        os.system('cp ldtk.doot ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot')
-    os.rename('ldtk.doot','ldtk.py')
-    os.system('mv ldtk.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
-    
-    wget.download('https://www.oursolarsiblings.com/client.doot')
-    os.rename('client.doot','client.py')
-    os.system('mv client.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/client.py')
-    
+        wget.download('https://www.oursolarsiblings.com/ldtk.doot')
+        if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
+            os.system('cp ldtk.doot ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot')
+        os.rename('ldtk.doot','ldtk.py')
+        try:
+            os.system('mv ldtk.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
+        except:
+            try:
+                os.remove('ldtk.py')
+            except:
+                pass
+            
+            try:
+                os.remove('ldtk.doot')
+            except:
+                pass
+        
+        wget.download('https://www.oursolarsiblings.com/client.doot')
+        os.rename('client.doot','client.py')
+        try:
+            os.system('mv client.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/client.py')
+        except:
+            try:
+                os.remove('client.py')
+            except:
+                pass
+            
+            try:
+                os.remove('client.doot')
+            except:
+                pass
+except:
+    print ("SOMETHING FAILED IN THE LDTK update")    
+    print(traceback.format_exc())
 
 print ("********************")
 print ("PTRSAGEMAKER LOADED")
@@ -791,6 +816,6 @@ def form_exotic_init_file_from_fits_files(directory=None, init_filename='init.js
 # from ptrsagemaker import ptrsagemaker
 # ptrsagemaker.form_exotic_init_file_from_fits_files(directory='tristantoi')
 
-breakpoint()
+#breakpoint()
     
 #run_astrosource_on_photfiles()
