@@ -4,6 +4,71 @@ import os
 import glob
 import shutil
 import traceback
+import getpass
+
+
+# Make doubly sure these tempfiles aren't lying around.
+try:
+    os.remove('ldtk.py')
+except:
+    pass
+
+try:
+    os.remove('ldtk.doot')
+except:
+    pass
+
+try:
+    os.remove('client.py')
+except:
+    pass
+
+try:
+    os.remove('client.doot')
+except:
+    pass
+
+try:
+    os.remove('../ldtk.py')
+except:
+    pass
+
+try:
+    os.remove('../ldtk.doot')
+except:
+    pass
+
+try:
+    os.remove('../client.py')
+except:
+    pass
+
+try:
+    os.remove('../client.doot')
+except:
+    pass
+
+try:
+    os.remove('ptrsagemaker/ldtk.py')
+except:
+    pass
+
+try:
+    os.remove('ptrsagemaker/ldtk.doot')
+except:
+    pass
+
+try:
+    os.remove('ptrsagemaker/client.py')
+except:
+    pass
+
+try:
+    os.remove('ptrsagemaker/client.doot')
+except:
+    pass
+
+
 
 try:
     import numpy
@@ -37,7 +102,8 @@ try:
     from astropy.io import fits
 except:
     os.system('pip install astropy==5.3.4 exotic ocs-archive ocs-ingester')
-    import astropy
+    #import astropy
+    from astropy.io import fits
     
 from pathlib import Path
 
@@ -86,8 +152,11 @@ try:
     from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
 except:
     os.system('pip install astrosource')
+    os.system('pip3 install astrosource')
     os.system('pip install git+https://github.com/zemogle/astrosource@dev')
+    os.system('pip3 install git+https://github.com/zemogle/astrosource@dev')
     os.system('pip install tqdm')
+    os.system('pip3 install tqdm')
     import astrosource
     from astrosource import TimeSeries
     from astrosource.utils import get_targets, folder_setup, AstrosourceException, cleanup, convert_coords
@@ -116,43 +185,45 @@ except:
     print ("EXOTIC IMPORT FAILED")
     print(traceback.format_exc())
             
-
-try:
-    if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
-        wget.download('https://www.oursolarsiblings.com/ldtk.doot')
+if str(getpass.getuser()) == 'studio-lab-user':
+    try:
         if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
-            os.system('cp ldtk.doot ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot')
-        os.rename('ldtk.doot','ldtk.py')
-        try:
-            os.system('mv ldtk.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
-        except:
+            wget.download('https://www.oursolarsiblings.com/ldtk.doot')
+            if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
+                os.system('cp ldtk.doot ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot')
+            os.rename('ldtk.doot','ldtk.py')
             try:
-                os.remove('ldtk.py')
+                os.system('mv ldtk.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
             except:
-                pass
+                try:
+                    os.remove('ldtk.py')
+                except:
+                    pass
+                
+                try:
+                    os.remove('ldtk.doot')
+                except:
+                    pass
             
+            wget.download('https://www.oursolarsiblings.com/client.doot')
+            os.rename('client.doot','client.py')
             try:
-                os.remove('ldtk.doot')
+                os.system('mv client.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/client.py')
             except:
-                pass
-        
-        wget.download('https://www.oursolarsiblings.com/client.doot')
-        os.rename('client.doot','client.py')
-        try:
-            os.system('mv client.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/client.py')
-        except:
-            try:
-                os.remove('client.py')
-            except:
-                pass
-            
-            try:
-                os.remove('client.doot')
-            except:
-                pass
-except:
-    print ("SOMETHING FAILED IN THE LDTK update")    
-    print(traceback.format_exc())
+                try:
+                    os.remove('client.py')
+                except:
+                    pass
+                
+                try:
+                    os.remove('client.doot')
+                except:
+                    pass
+    except:
+        print ("SOMETHING FAILED IN THE LDTK update")    
+        print(traceback.format_exc())
+
+
 
 print ("********************")
 print ("PTRSAGEMAKER LOADED")
@@ -231,16 +302,17 @@ def run_exotic_on_phot_files(directory, ra=0.0, dec=0.0, photformat='psx'):
 
 
 def link_ldtk_to_oss():
-    wget.download('https://www.oursolarsiblings.com/ldtk.doot')
-    if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
-        os.system('cp ldtk.doot ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot')
-    os.rename('ldtk.doot','ldtk.py')
-    os.system('mv ldtk.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
-    
-    wget.download('https://www.oursolarsiblings.com/client.doot')
-    os.rename('client.doot','client.py')
-    os.system('mv client.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/client.py')
-    
+    if str(getpass.getuser()) == 'studio-lab-user':
+        wget.download('https://www.oursolarsiblings.com/ldtk.doot')
+        if not os.path.exists('~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot'):
+            os.system('cp ldtk.doot ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.doot')
+        os.rename('ldtk.doot','ldtk.py')
+        os.system('mv ldtk.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
+        
+        wget.download('https://www.oursolarsiblings.com/client.doot')
+        os.rename('client.doot','client.py')
+        os.system('mv client.py ~/.conda/envs/default/lib/python3.9/site-packages/ldtk/client.py')
+        
 
 def remove_smartstacks_from_directory(directory):
     files = glob.glob(directory + '/*SmSTACK*')
