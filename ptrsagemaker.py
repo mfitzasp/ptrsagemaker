@@ -73,7 +73,7 @@ except:
 try:
     import numpy
 except:
-    os.system('pip install numpy')
+    os.system('pip install -U numpy==1.26.4')
     import numpy
     
 try:
@@ -236,7 +236,7 @@ def update_packages():
     os.system('pip install -U requests')
     os.system('pip install -U wget')
     
-    os.system('pip install -U numpy')
+    os.system('pip install -U numpy==1.26.4')
     os.system('pip install -U scipy')
     os.system('pip install -U setuptools')
     os.system('pip install git+https://github.com/mfitzasp/ptrEXOTIC@main')
