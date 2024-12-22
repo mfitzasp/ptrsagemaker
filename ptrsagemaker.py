@@ -5,7 +5,7 @@ import glob
 import shutil
 import traceback
 import getpass
-
+import platform
 
 # Make doubly sure these tempfiles aren't lying around.
 try:
@@ -83,11 +83,11 @@ except:
     import wget
 
     
-try:
-    import bokeh
-except:
-    os.system('pip install bokeh')
-    import bokeh
+# try:
+#     import bokeh
+# except:
+#     os.system('pip install bokeh')
+#     import bokeh
 
 try:
     from PIL import Image, ImageFont, ImageDraw
@@ -98,13 +98,15 @@ except:
 import json
 import sys
 try:
-
     from astropy.io import fits
 except:
-    os.system('pip install astropy~=6.1 exotic ocs-archive ocs-ingester')
+    os.system('pip install astropy~=6.1')
     #import astropy
     from astropy.io import fits
-    
+
+
+
+
 from pathlib import Path
 
 try:
@@ -167,23 +169,28 @@ try:
 except:
     os.system('pip install -U numba')
     import numba
-    
-try:
+
+
+if platform.system() == "Windows":
+    print ("Not loading exotic as not working in windows yet")
+else:
+
     try:
-        import exotic
-        from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
+        try:
+            import exotic
+            from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
+        except:
+            os.system('pip install exotic')
+            os.system('pip install --upgrade setuptools')
+            os.system('pip install git+https://github.com/mfitzasp/ptrEXOTIC@main')
+            import exotic
+            from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
+            # Need to patch over the limb darkening tables as the default tries to link to an ftp server that blocks AWS for some reason
+            #wget.download('https://www.solarsiblings.com/ldtables/ldtk.py', out='~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
+            #def link_ldtk_to_oss():
     except:
-        os.system('pip install exotic')
-        os.system('pip install --upgrade setuptools')
-        os.system('pip install git+https://github.com/mfitzasp/ptrEXOTIC@main')
-        import exotic
-        from exotic.exotic import NASAExoplanetArchive, get_wcs, find_target
-        # Need to patch over the limb darkening tables as the default tries to link to an ftp server that blocks AWS for some reason
-        #wget.download('https://www.solarsiblings.com/ldtables/ldtk.py', out='~/.conda/envs/default/lib/python3.9/site-packages/ldtk/ldtk.py')
-        #def link_ldtk_to_oss():
-except:
-    print ("EXOTIC IMPORT FAILED")
-    print(traceback.format_exc())
+        print ("EXOTIC IMPORT FAILED")
+        print(traceback.format_exc())
             
 if str(getpass.getuser()) == 'studio-lab-user':
     try:
