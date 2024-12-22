@@ -101,7 +101,7 @@ try:
 
     from astropy.io import fits
 except:
-    os.system('pip install astropy==5.3.4 exotic ocs-archive ocs-ingester')
+    os.system('pip install astropy~=6.1 exotic ocs-archive ocs-ingester')
     #import astropy
     from astropy.io import fits
     
@@ -235,10 +235,13 @@ def update_packages():
     os.system('pip install -U git+https://github.com/zemogle/astrosource@dev')
     os.system('pip install -U requests')
     os.system('pip install -U wget')
-    os.system('pip install -U astropy')
+    
     os.system('pip install -U numpy')
+    os.system('pip install -U scipy')
     os.system('pip install -U setuptools')
     os.system('pip install git+https://github.com/mfitzasp/ptrEXOTIC@main')
+    
+    os.system('pip install -U astropy~=6.1')
     print ("Packages updated. Please restart your console to use the latest packages.")
     
 
